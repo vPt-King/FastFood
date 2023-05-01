@@ -31,10 +31,14 @@ import FastFood.DAO.AdminDAO;
 import FastFood.DAO.CategoryDAO;
 import FastFood.DAO.ProductDAO;
 import FastFood.DAO.UserDAO;
+import FastFood.DAO.OrderDAO;
 import FastFood.DAO.CustomerDAO;
+import FastFood.DAO.Order_ProductDAO;
 import FastFood.Entity.Admin;
 import FastFood.Entity.Category;
 import FastFood.Entity.Customer;
+import FastFood.Entity.Order;
+import FastFood.Entity.Order_Product;
 import FastFood.Entity.Product;
 import FastFood.Entity.User;
 import FastFood.Entity.User_Customer;
@@ -42,6 +46,8 @@ import FastFood.Entity.Whole;
 import FastFood.Model.LoginResponse;
 import FastFood.Model.PutResponse;
 import FastFood.Model.RegisterResponse;
+//import HotelBooking.Dao.RoomsDAO;
+//import HotelBooking.Entity.Rooms;
 import FastFood.Model.InsertResponse;
 import FastFood.Model.DeleteResponse;
 @RestController
@@ -160,14 +166,21 @@ public class AdminController {
 	{
 		Gson gson = new Gson();
 		CategoryDAO categoryDAO = new CategoryDAO();
-		int k = categoryDAO.DeleteCategory(category);
 		DeleteResponse dr = null;
-		if(k != 1)
+		if(categoryDAO.CheckIfCategoryIsUsedByProduct(category.getId()) != 1)
 		{
-			dr = new DeleteResponse(0, "Error occur! Can not delete category");
+			dr = new DeleteResponse(0, "Error occur! Can not delete category bescause is attrached some product");
 		}
-		else {
-			dr = new DeleteResponse(1, "Delete successfully");
+		else 
+		{
+			int k = categoryDAO.DeleteCategory(category);
+			if(k != 1)
+			{
+				dr = new DeleteResponse(0, "Error occur! Can not delete category");
+			}
+			else {
+				dr = new DeleteResponse(1, "Delete successfully");
+			}
 		}
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
@@ -278,14 +291,8 @@ public class AdminController {
 	    }
 	    Product p = new Product(id,name,description,quantity,price,category_id,photoName);
 	    ProductDAO pDAO = new ProductDAO();
-	    if(pDAO.CheckIfProductIsExist(p) == 0)
-	    {
-	    	int k = pDAO.EditProductById(p);
-	    	ir = new InsertResponse(1,"edit success");
-	    }
-	    else {
-	    	ir = new InsertResponse(0,"product name is exist");
-	    }
+	    int k = pDAO.EditProductById(p);
+	    ir = new InsertResponse(1,"edit success");
 	    String json = gson.toJson(ir);
  	    return new ResponseEntity<String>(json,HttpStatus.OK);   
 	}
@@ -381,6 +388,9 @@ public class AdminController {
 		Gson gson = new Gson();
 		InsertResponse ir = null;
 		CustomerDAO customerDAO = new CustomerDAO();
+		UserDAO uDAO = new UserDAO();
+		User user = uDAO.GetUserDetailById(customer.getUser_id());
+		customer.setGmail(user.getGmail());
 		int k = customerDAO.InsertNewCustomer(customer);
 		if(k == 1)
 		{
@@ -450,5 +460,40 @@ public class AdminController {
 		}
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
+	}
+	@GetMapping("/get-all-orders")
+	public List<Order> GetAllOrders()
+	{
+		OrderDAO oDAO = new OrderDAO();
+		return oDAO.GetAllOrders();
+	}
+	
+	@PostMapping("/change-status-orders")
+	public void ChangeStatusOrders(@RequestBody Order r)
+	{
+		OrderDAO oDAO = new OrderDAO();
+		oDAO.ChangeStatusById(r);
+	}
+	
+	@PostMapping("/get-customer-orders")
+	public Customer GetCustomerByOrderId(@RequestBody Order r)
+	{
+		OrderDAO oDAO = new OrderDAO();
+		Order order = oDAO.GetCustomerIdByOrderId(r.getId());
+		CustomerDAO cDAO = new CustomerDAO();
+		return cDAO.getCustomerByOrderId(order.getCustomer_id());
+	}
+	
+	@PostMapping("/get-orders-details")
+	public Order GetOrderDetail(@RequestBody Order r)
+	{
+		OrderDAO oDAO = new OrderDAO();
+		return oDAO.GetOrderById(r.getId());
+	}
+	@PostMapping("/get-order-products")
+	public List<Order_Product> GetListOrder_Product(@RequestBody Order r) 
+	{
+		Order_ProductDAO opDAO = new Order_ProductDAO();
+		return opDAO.GetListOrder_ProductByOrderId(r.getId());
 	}
 }

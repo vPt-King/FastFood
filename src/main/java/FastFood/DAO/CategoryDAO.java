@@ -38,7 +38,7 @@ public class CategoryDAO {
 	{
 		Connection a = DBconnect.getJDBCConnection();
 		List<Category> list = new ArrayList<>();
-		String q = "select * from category";
+		String q = "select * from category order by id asc";
 		try {
 			PreparedStatement ps = a.prepareStatement(q);
 			ResultSet rs = ps.executeQuery();
@@ -122,6 +122,29 @@ public class CategoryDAO {
 			}
 			return 1;
 		}
+	}
+	
+	public int CheckIfCategoryIsUsedByProduct(int category_id)
+	{
+		int k = 1;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from product where category_id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, category_id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				k = 0;
+			}
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
 	}
 	
 	public int DeleteCategory(Category category)

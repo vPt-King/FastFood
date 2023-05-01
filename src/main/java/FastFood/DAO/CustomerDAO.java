@@ -19,13 +19,14 @@ public class CustomerDAO {
 	{
 		int k = 1;
 		Connection a = DBconnect.getJDBCConnection();
-		String q = "insert into customer(name,phone,address,user_id) values(?,?,?,?)";
+		String q = "insert into customer(name,phone,address,user_id,gmail) values(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = a.prepareStatement(q);
 			ps.setString(1, c.getName());
 			ps.setString(2, c.getPhone());
 			ps.setString(3, c.getAddress());
 			ps.setInt(4,c.getUser_id());
+			ps.setString(5, c.getGmail());
 			k=ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -44,7 +45,7 @@ public class CustomerDAO {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
 			{
-				customer.add(new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("phone"),rs.getString("address"),rs.getInt("user_id")));
+				customer.add(new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("phone"),rs.getString("address"),rs.getInt("user_id"),rs.getString("gmail")));
 			}
 			rs.close();
 			ps.close();
@@ -113,5 +114,28 @@ public class CustomerDAO {
 			e.printStackTrace();
 		}
 		return k;
+	}
+	
+	public Customer getCustomerByOrderId(int id)
+	{
+		Customer u = null;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from customer where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				u = new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("phone"),rs.getString("address"),rs.getInt("user_id"),rs.getString("gmail"));
+			}
+			System.out.println(u.getGmail());
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return u;
 	}
 }

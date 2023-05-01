@@ -147,4 +147,29 @@ public class UserDAO {
 		}
 		return k;
 	}
+	
+	public User GetUserDetailById(int id)
+	{
+		User u = null;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from user where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			if(rs.next())
+			{
+				java.sql.Date date = rs.getDate("created_at");
+				String dateString = dateFormat.format(date);
+				u = new User(rs.getInt("id"),rs.getString("name"),dateString,rs.getString("gmail"),rs.getString("password"),rs.getString("phone"),rs.getString("address"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return u;
+	}
+	
 }

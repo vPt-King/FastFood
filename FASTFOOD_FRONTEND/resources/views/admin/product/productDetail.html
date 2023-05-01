@@ -190,7 +190,7 @@
                                 <p id="product_description"></p>
 
                                 <hr>
-                                <h4 id="product_quantity"></h4>
+                                <h4 id="product_quantity">Quantity: </h4>
 
 
                                 <h4 class="mt-3" id="product_category">Product Category: </h4>
@@ -279,6 +279,7 @@
                document.getElementById("product_description").innerHTML = product.description;
                document.getElementById("product_price").innerHTML = "$"+product.price;
                document.getElementById("product_category").innerHTML += category.name;
+               document.getElementById("product_quantity").innerHTML += product.quantity;
                document.getElementById("product_image_1").setAttribute("src","http://localhost:8080/getimage/"+product.image);
                document.getElementById("product_image_2").setAttribute("src","http://localhost:8080/getimage/"+product.image);
             }

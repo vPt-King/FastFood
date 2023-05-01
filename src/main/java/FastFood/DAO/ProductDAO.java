@@ -13,7 +13,7 @@ public class ProductDAO {
 	{
 		List<Product> list = new ArrayList();
 		Connection a = DBconnect.getJDBCConnection();
-		String q = "select * from product";
+		String q = "select * from product order by id asc";
 		try {
 			PreparedStatement ps = a.prepareStatement(q);
 			ResultSet rs = ps.executeQuery();

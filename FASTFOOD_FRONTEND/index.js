@@ -43,6 +43,15 @@ app.get('/admin/edit-category', function(req, res) {
     }
 });
 
+app.get('/admin/invoice', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "admin/invoice/invoice.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
 app.get('/admin/product', function(req, res) {
     if(req.cookies.isAdmin){
     res.sendFile(views + "admin/product/product.html");
@@ -73,6 +82,15 @@ app.get('/admin/edit-product', function(req, res) {
 app.get('/admin/product-detail', function(req, res) {
     if(req.cookies.isAdmin){
     res.sendFile(views + "admin/product/productDetail.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
+app.get('/admin/order', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "admin/order/order.html");
     }
     else{
         res.redirect("/admin/login");
@@ -128,6 +146,15 @@ app.get('/admin/more-customer', function(req, res) {
 app.get('/admin/edit-customer', function(req, res) {
     if(req.cookies.isAdmin){
     res.sendFile(views + "admin/customer/editCustomer.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
+app.get('/admin/view-order', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "admin/order/viewOrder.html");
     }
     else{
         res.redirect("/admin/login");
