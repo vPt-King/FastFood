@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <!--        <link href="img/favicon.ico" rel="icon">-->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/admin/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/admin/login.css" />
+    <title>FastFood</title>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="/fastfood" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">Fast</span>Food</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="main">
+        <form id="login_form" method="POST" class="form" id="form-1">
+            <h3 class="heading">Login</h3>
+            <div class="form-group">
+                <label for="email" class="form-label" style="color:black">Email</label>
+                <input id="email" name="email" type="email" placeholder="Email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label" style="color:black">Password</label>
+                <input id="password" name="password" type="password" placeholder="Password" class="form-control"
+                    required>
+            </div>
+            <a href="forget-password" class="fp" style="color: blue !important;">Forgot password</a>
+            <button class="form-submit" type="button" onclick="login()">Login</button>
+            <br>
+            <p class="res">You don't have account ? Please register <a href="/admin/register" class="res">in here</a></p>
+        </form>
+    </div>
+    <script>
+        function login() {
+            let gmail = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let data =
+            {
+                gmail: gmail,
+                password: password
+            };
+            console.log("o day roi");
+            fetch("http://localhost:8080/admin/login", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 1) {
+                        document.cookie = "isAdmin=" + data.id + ";max-age=86400;path=/";
+                        window.location = "http://localhost:3000/admin";
+                    }
+                    alert(data.message);
+                })
+                .catch(err => alert("Login failed: "));
+        }
+    </script>
+</body>
+
+</html>
