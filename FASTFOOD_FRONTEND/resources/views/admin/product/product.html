@@ -106,7 +106,7 @@
                             <a href="/admin/category" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Categories List
+                                    category
 
                                 </p>
                             </a>
@@ -272,7 +272,7 @@
             xhr.open("DELETE", "http://localhost:8080/admin/delete-product", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onload = function () {
-                alert("delete product successfully");
+                alert(JSON.parse(this.responseText).message);
                 location.reload();
             }
             xhr.send(JSON.stringify(data));

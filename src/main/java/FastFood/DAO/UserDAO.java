@@ -171,5 +171,26 @@ public class UserDAO {
 		}
 		return u;
 	}
+
+	public int CheckIfUserIsExistInOrder(int id) {
+		int k = 0;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from user,orders,customer where user.id = ? and customer.user_id=user.id and orders.customer_id = customer.id and orders.status = 0";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				k = 1;
+			}
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
+	}
 	
 }

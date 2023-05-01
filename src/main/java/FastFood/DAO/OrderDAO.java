@@ -103,4 +103,20 @@ public class OrderDAO {
 		}
 		return u;
 	}
+	public int DeleteOrderById(Order o) {
+		int k = 0;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "delete FROM orders where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, o.getId());
+			k = ps.executeUpdate();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
+	}
 }

@@ -130,4 +130,25 @@ public class ProductDAO {
 		}
 		return k;
 	}
+
+	public int CheckIfProductIsExistInOrder(int id) {
+		int k = 0;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from order_product,orders where order_product.product_id = ? and orders.status = 0";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				k = 1;
+			}
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
+	}
 }

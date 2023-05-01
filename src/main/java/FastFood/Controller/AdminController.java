@@ -303,13 +303,19 @@ public class AdminController {
 		Gson gson = new Gson();
 		DeleteResponse dr = null;
 		ProductDAO pDAO = new ProductDAO();
-		int k = pDAO.DeleteProductById(p);
-		if(k == 1)
+		if(pDAO.CheckIfProductIsExistInOrder(p.getId()) == 0)
 		{
-			dr = new DeleteResponse(1, "delete oke");
+			int k = pDAO.DeleteProductById(p);
+			if(k == 1)
+			{
+				dr = new DeleteResponse(1, "delete oke");
+			}
+			else {
+				dr = new DeleteResponse(1, "delete not oke");
+			}
 		}
 		else {
-			dr = new DeleteResponse(1, "delete not oke");
+			dr = new DeleteResponse(1, "delete not successfully because this product is in some progress order");
 		}
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
@@ -370,13 +376,21 @@ public class AdminController {
 		Gson gson = new Gson();
 		DeleteResponse dr = null;
 		UserDAO userDAO = new UserDAO();
-		int k = userDAO.DeleteUserById(user);
-		if(k == 1)
+		if(userDAO.CheckIfUserIsExistInOrder(user.getId()) == 0)
 		{
-			dr = new DeleteResponse(1, "delete oke");
+			CustomerDAO customerDAO = new CustomerDAO();
+			int dc = customerDAO.DeleteCustomerByUserId(user.getId());
+			int k = userDAO.DeleteUserById(user);
+			if(k == 1)
+			{
+				dr = new DeleteResponse(1, "delete oke");
+			}
+			else {
+				dr = new DeleteResponse(1, "delete not oke");
+			}
 		}
 		else {
-			dr = new DeleteResponse(1, "delete not oke");
+			dr = new DeleteResponse(1, "Delete not successfully because this user is in some progress order");
 		}
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
@@ -450,13 +464,19 @@ public class AdminController {
 		Gson gson = new Gson();
 		DeleteResponse dr = null;
 		CustomerDAO customerDAO = new CustomerDAO();
-		int k = customerDAO.DeleteCustomerById(customer);
-		if(k == 1)
+		if(customerDAO.CheckIfCustomerIsExistInOrder(customer.getId()) == 0)
 		{
-			dr = new DeleteResponse(1, "delete oke");
+			int k = customerDAO.DeleteCustomerById(customer);
+			if(k == 1)
+			{
+				dr = new DeleteResponse(1, "delete oke");
+			}
+			else {
+				dr = new DeleteResponse(1, "delete not oke");
+			}
 		}
 		else {
-			dr = new DeleteResponse(1, "delete not oke");
+			dr = new DeleteResponse(1, "Delete not successfully because this customer is in some progress order");
 		}
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
@@ -495,5 +515,23 @@ public class AdminController {
 	{
 		Order_ProductDAO opDAO = new Order_ProductDAO();
 		return opDAO.GetListOrder_ProductByOrderId(r.getId());
+	}
+	
+	@DeleteMapping("delete-order")
+	public ResponseEntity<String> DeleteOrder(@RequestBody Order o)
+	{
+		Gson gson = new Gson();
+		DeleteResponse dr = null;
+		OrderDAO oDAO = new OrderDAO();
+		int k = oDAO.DeleteOrderById(o);
+		if(k == 1)
+		{
+			dr = new DeleteResponse(1, "delete oke");
+		}
+		else {
+			dr = new DeleteResponse(1, "delete not oke");
+		}
+		String json = gson.toJson(dr);
+		return new ResponseEntity<String>(json,HttpStatus.OK);
 	}
 }

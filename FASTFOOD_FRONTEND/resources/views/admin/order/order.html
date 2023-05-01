@@ -97,7 +97,7 @@
                                 <a href="/admin/category" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        Categories List
+                                        category
                                        
                                     </p>
                                 </a>
@@ -304,8 +304,18 @@
             });
             var btnDeleteOrder = document.getElementById("btn-delete-order");
             btnDeleteOrder.onclick = function () {
-                deleteForm.action = "/admin/deleteOrder?id=" + orderId;
-                deleteForm.submit();
+                let data = {
+                    id: parseInt(orderId)
+                };
+                let xhr = new XMLHttpRequest();
+                xhr.open("DELETE","http://localhost:8080/admin/delete-order",true);
+                xhr.setRequestHeader("Content-Type","application/json");
+                xhr.onload = function()
+                {
+                    alert(JSON.parse(this.responseText).message);
+                    location.reload();
+                }
+                xhr.send(JSON.stringify(data));
             }
         });
         function toggle_status(id, val) {
