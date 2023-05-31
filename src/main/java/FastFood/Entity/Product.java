@@ -72,6 +72,14 @@ public class Product {
 	public Product(int id) {
 		this.id = id;
 	}
+	public Product(int id, String name, String description, int quantity, double price, int category_id) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.quantity = quantity;
+		this.price = price;
+		this.category_id = category_id;
+	}
 	
 	
 }

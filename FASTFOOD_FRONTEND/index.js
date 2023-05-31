@@ -134,6 +134,15 @@ app.get('/admin/customer', function(req, res) {
     }
 });
 
+app.get('/admin/customer-of-user', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "admin/customer/customerOfUser.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
 app.get('/admin/more-customer', function(req, res) {
     if(req.cookies.isAdmin){
     res.sendFile(views + "admin/customer/moreCustomer.html");
@@ -161,6 +170,37 @@ app.get('/admin/view-order', function(req, res) {
     }
 });
 
+app.get('/admin/carousel', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "/admin/carousel.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
+app.get('/admin/settings', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "/admin/settings.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
+app.get('/admin/user-queries', function(req, res) {
+    if(req.cookies.isAdmin){
+    res.sendFile(views + "/admin/user_queries.html");
+    }
+    else{
+        res.redirect("/admin/login");
+    }
+});
+
+app.get('/admin/adminLogout', function(req, res) {
+    res.redirect("/admin/login");
+});
+
 app.get('/admin', function(req, res) {
     if(req.cookies.isAdmin){
     res.sendFile(views + "admin/homepage.html");
@@ -169,9 +209,57 @@ app.get('/admin', function(req, res) {
         res.redirect("/admin/login");
     }
 });
-// app.get('/', function(req, res) {
-//     res.sendFile(views + "Client/HomePage.html");
-// });
+
+
+//user routes
+
+
+
+app.get('/login', function(req, res) {
+    res.sendFile(views + "user/login.html");
+});
+
+app.get('/register', function(req, res) {
+    res.sendFile(views + "user/register.html");
+});
+
+app.get('/forgot-password', function(req, res) {
+    res.sendFile(views + "user/forgotPassword.html");
+});
+
+app.get('/contact', function(req, res) {
+    res.sendFile(views + "user/contact.html");
+});
+
+app.get('/products_category', function(req, res) {
+    res.sendFile(views + "user/products_category.html");
+});
+
+
+app.get('/product_detail', function(req, res) {
+    res.sendFile(views + "user/detail.html");
+});
+
+app.get('/cart', function(req, res) {
+    res.sendFile(views + "user/cart.html");
+});
+
+app.get('/checkout', function(req, res) {
+    res.sendFile(views + "user/checkout.html");
+});
+
+app.get('/orders', function(req, res) {
+    res.sendFile(views + "user/history.html");
+});
+
+app.get('/viewOrder', function(req, res) {
+    res.sendFile(views + "user/viewOrder.html");
+});
+
+
+app.get('/', function(req, res) {
+    res.sendFile(views + "user/homepage.html");
+});
 
 
 app.listen(port, () => {

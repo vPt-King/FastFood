@@ -115,7 +115,38 @@
                                 <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
 
-
+                         <li class="nav-item">
+                            <a href="/admin" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/settings" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Settings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/carousel" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Carousel
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/user-queries" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    User Queries
+                                </p>
+                            </a>
+                        </li>
                                 <li class="nav-item">
                                     <a href="/admin/category" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
@@ -289,10 +320,6 @@
                                                     <td id="orders-sub_total"></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Tax (10%)</th>
-                                                    <td id="orders-tax"></td>
-                                                </tr>
-                                                <tr>
                                                     <th>Shipping:</th>
                                                     <td id="shop-shipping">shop.shipping</td>
                                                 </tr>
@@ -318,6 +345,8 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
+        
         <footer class="main-footer no-print">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> 3.2.0
@@ -416,8 +445,8 @@
                 document.getElementById("orders-created-at").innerHTML += " " + res.started_date;
                 document.getElementById("orders-started").innerHTML+= " " + res.started_date;
                 document.getElementById("orders-sub_total").innerHTML = res.sub_total;
-                document.getElementById("orders-tax").innerHTML = res.sub_total*10/100;
-                document.getElementById("orders-total").innerHTML =res.sub_total*10/100 + res.sub_total + 300;
+
+                document.getElementById("orders-total").innerHTML =res.sub_total + 10;
 
             }
             xhr.send(JSON.stringify(data));

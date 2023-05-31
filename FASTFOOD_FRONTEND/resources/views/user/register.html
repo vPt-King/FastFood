@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <!--        <link href="img/favicon.ico" rel="icon">-->
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/admin/style.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FastFood</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="/fastfood" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">Fast</span>Food</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <form method="POST" class="form" id="form-1">
+            <h3 class="heading">REGISTER</h3>
+
+            <div class="form-group">
+                <label for="fullname" class="form-label" style="color:black">Full Name</label>
+                <input id="fullname" name="fullname" placeholder="Full name" type="text" class="form-control" required>
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label" style="color:black">Email</label>
+                <input id="email" name="email" type="email" class="form-control" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label" style="color:black">Password</label>
+                <input id="password" name="password" type="password" class="form-control" placeholder="Password"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password_confirmation" class="form-label" style="color:black">Confirm Password</label>
+                <input id="password_confirmation" name="password_confirmation" type="password"
+                    placeholder="Confirmation Password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="address" class="form-label" style="color:black">Address</label>
+                <input id="address" name="address" type="text" placeholder="address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="form-label" style="color:black">Phone</label>
+                <input id="phone" name="phone" type="text" placeholder="phone" class="form-control" required>
+            </div>
+            <span id="message" style="color: red; font-size: 18px;" hidden></span>
+            <button class="form-submit" type="button" onclick="register()">SUBMIT</button>
+            <p class="res">Already have account? Login <a class="res" href="/admin/login">in here</a> </p>
+        </form>
+
+    </div>
+    <link rel="stylesheet" href="../../css/admin/register.css" />
+    <script>
+        function register() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const gmail = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let passwordConfirm = document.getElementById("password_confirmation").value;
+            let message = document.getElementById("message");
+            if (!message.hasAttribute("hidden")) {
+                message.setAttribute("hidden", "true");
+                message.innerHTML = "";
+            }
+            if(password.length < 5)
+            {
+                message.innerHTML = "Password must be at least 5 characters";
+                message.removeAttribute("hidden");
+            }
+            if (!emailRegex.test(gmail)) {
+                message.innerHTML = "Email is invalid";
+                message.removeAttribute("hidden");
+            }
+            if (password != passwordConfirm) {
+                message.innerHTML = "Wrong password confirmation";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("email").value === "") {
+                message.innerHTML = "Fill in your email address";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("fullname").value === "") {
+                message.innerHTML = "Fill in your name";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("password").value === "") {
+                message.innerHTML = "Fill in your password";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("password_confirmation").value === "") {
+                message.innerHTML = "Fill in your password confirmation";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("date").value === "") {
+                message.innerHTML = "Fill in your date";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("address").value === "") {
+                message.innerHTML = "Fill in your address";
+                message.removeAttribute("hidden");
+            }
+            if (document.getElementById("phone").value === "") {
+                message.innerHTML = "Fill in your phone";
+                message.removeAttribute("hidden");
+            }
+            else {
+                let data = {
+                    gmail: document.getElementById("email").value,
+                    name: document.getElementById("fullname").value,
+                    password: document.getElementById("password").value,
+                    address: document.getElementById("address").value,
+                    phone: document.getElementById("phone").value
+                }
+                fetch("http://localhost:8080/register", {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 1) {
+                            alert(data.message);
+                            window.location.href = "http://localhost:3000/login";
+                        }
+                        else {
+                            alert(data.message);
+                        }
+                    })
+
+            }
+        }
+    </script>
+</body>
+
+</html>

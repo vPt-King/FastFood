@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin FastFood</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+
+    <link rel="stylesheet" type="text/css" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!--  <link rel="stylesheet" href="C:\Users\TDT Computer\Documents\Thanh\University\K2_N3\thuc_tap_co_so\FastFood\web\admin\../../plugins\fontawesome-free\css\all.min.css">-->
+    <!-- Theme style -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../dist/css/adminlte.min.css">
+    <!--<link rel="stylesheet" href="C:\Users\TDT Computer\Documents\Thanh\University\K2_N3\thuc_tap_co_so\FastFood\web\admin\../../dist\css\adminlte.css">-->
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="index3.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-link">
+                    <a href="/admin/adminLogout" style="margin-top:5px; box-sizing: box;">Logout</a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/admin" class="brand-link">
+                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">FastFood</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="/infor" class="d-block">Admin</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                                 with font-awesome or any other icon font library -->
+
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/settings" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Settings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/carousel" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Carousel
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/user-queries" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    User Queries
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/category" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Category
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/product" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Products
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/user" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="/admin/customer" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Customers
+                                </p>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="/admin/order" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Orders
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Settings</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Starter Page</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content w-100">
+                <div class="container-fluid w-100">
+                    <div class="row w-100">
+                        <div class="ms-auto w-100">
+
+                            <!-- General Settings section -->
+
+                            <div class="card border-0 shadow mb-4 w-100">
+                                <div class="card-body w-100">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h5 class="card-title m-0">General Settings</h5>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm"
+                                            data-bs-toggle="modal" data-bs-target="#general-s">
+                                            <i class="bi bi-pen-fill"></i> Edit
+                                        </button>
+                                    </div>
+
+                                    <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
+                                    <p class="card-text" id="site_title">
+
+                                    </p>
+                                    <h6 class="card-subtitle mb-1 fw-bold">About Us</h6>
+                                    <p class="card-text" id="site_about"></p>
+                                </div>
+                            </div>
+
+                            <!--General Settings Modal -->
+                            <div class="modal fade" id="general-s" data-bs-backdrop="static" data-bs-keyboard="true"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form id="general_s_form">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">General Settings</h5>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label class="form-label fw-bold">Site Title</label>
+                                                    <input type="text" name="site_title" id="site_title_inp"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label fw-bold">About us</label>
+                                                    <textarea name="site_about" id="site_about_inp"
+                                                        class="form-control shadow-none" rows="6" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                    onclick="site_title.value=general_data.site_title,site_title.value = general_data.site_about"
+                                                    class="btn text-secondary shadow-none"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit"
+                                                    class="btn btn-primary text-white shadow-none">SUBMIT</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <!--Shutdown Section-->
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h5 class="card-title m-0">Shutdown website </h5>
+                                        <div class="form-check form-switch">
+                                            <form>
+                                                <input onchange="upd_shutdown(this.value)" class="form-check-input"
+                                                    type="checkbox" id="shutdown-toggle">
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                    <p class="card-text">No customers will be allowed to order food when Shutdown
+                                        node is turn on</p>
+                                </div>
+                            </div>
+
+                            <!-- Contact details section -->
+                            <div class="card border-0 shadow mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h5 class="card-title m-0">Contacts Settings</h5>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm"
+                                            data-bs-toggle="modal" data-bs-target="#contacts-s">
+                                            <i class="bi bi-pen-fill"></i> Edit
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">Address</h6>
+                                                <p class="card-text" id="address"></p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">Google Map</h6>
+                                                <p class="card-text" id="gmap"></p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">Phone Numbers</h6>
+                                                <p class="card-text mb-1">
+                                                    <i class="bi bi-telephone-fill"></i>
+                                                    <span id="pn1"></span>
+                                                </p>
+                                                <p class="card-text">
+                                                    <i class="bi bi-telephone-fill"></i>
+                                                    <span id="pn2"></span>
+                                                </p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">E-mail</h6>
+                                                <p class="card-text" id="email"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">Social Links</h6>
+                                                <p class="card-text mb-1">
+                                                    Facebook:
+                                                    <span id="fb"></span>
+                                                </p>
+                                                <p class="card-text mb-1">
+                                                    Instagram:
+                                                    <span id="insta"></span>
+                                                </p>
+                                                <p class="card-text">
+                                                    Twitter:
+                                                    <span id="tw"></span>
+                                                </p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <h6 class="card-subtitle mb-1 fw-bold">iFrame</h6>
+                                                <iframe id="iframe" class="border p-2 w-100" loading="lazy"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Contacts details Modal -->
+                            <div class="modal fade" id="contacts-s" data-bs-backdrop="static" data-bs-keyboard="true"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <form id="contacts_s_form">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Contacts Settings</h5>
+
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="container-fluid p-0">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">Address</label>
+                                                                <input type="text" name="address" id="address_inp"
+                                                                    class="form-control shadow-none" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">Google Map
+                                                                    Link</label>
+                                                                <input type="text" name="gmap" id="gmap_inp"
+                                                                    class="form-control shadow-none" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">Phone Numbers (with
+                                                                    country code)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-telephone-fill"></i></span>
+                                                                    <input type="text" name="pn1" id="pn1_inp"
+                                                                        class="form-control shadow-none" required>
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-telephone-fill"></i></span>
+                                                                    <input type="text" name="pn2" id="pn2_inp"
+                                                                        class="form-control shadow-none">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label fw-bold">Email</label>
+                                                                    <input type="text" name="email" id="email_inp"
+                                                                        class="form-control shadow-none" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">Social Links</label>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-facebook"></i></span>
+                                                                    <input type="text" name="pb" id="fb_inp"
+                                                                        class="form-control shadow-none" required>
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-instagram"></i></span>
+                                                                    <input type="text" name="insta" id="insta_inp"
+                                                                        class="form-control shadow-none" required>
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-twitter"></i></span>
+                                                                    <input type="text" name="tw" id="tw_inp"
+                                                                        class="form-control shadow-none" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">iFrame Src</label>
+                                                                <input type="text" name="iframe" id="iframe_inp"
+                                                                    class="form-control shadow-none" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="contacts_inp(contacts_data)"
+                                                    class="btn text-secondary shadow-none"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit"
+                                                    class="btn btn-primary text-white shadow-none">SUBMIT</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Management Team section -->
+
+                            <div class="card border-0 shadow mb-4">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <h5 class="card-title m-0">Management Team</h5>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm"
+                                            data-bs-toggle="modal" data-bs-target="#team-s">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    </div>
+                                    <div class="row" id="team-data">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Management Team modal -->
+
+                            <div class="modal fade" id="team-s" data-bs-backdrop="static" data-bs-keyboard="true"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form id="team_s_form" enctype='multipart/form-data'>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Add Team Member</h5>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label class="form-label fw-bold">Name</label>
+                                                    <input type="text" name="member_name" id="member_name_inp"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label fw-bold">Picture</label>
+                                                    <input type="file" name="member_picture" id="member_picture_inp"
+                                                        accept="[ .jpg, .png, .webp, .jpeg]"
+                                                        class="form-control shadow-none" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="" class="btn text-secondary shadow-none"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary text-white shadow-none"
+                                                    disabled id="btn_add_member">SUBMIT</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- /.content-wrapper -->
+
+
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script>
+        let general_data, contacts_data;
+        let general_s_form = document.getElementById('general_s_form');
+        let site_title_inp = document.getElementById('site_title_inp');
+        let site_about_inp = document.getElementById('site_about_inp');
+        let contacts_s_form = document.getElementById('contacts_s_form');
+        let team_s_form = document.getElementById('team_s_form');
+        let member_name_inp = document.getElementById('member_name_inp');
+        let member_picture_inp = document.getElementById('member_picture_inp');
+
+        function get_general() {
+            let site_title = document.getElementById("site_title");
+            let site_about = document.getElementById("site_about");
+            let shutdown_toggle = document.getElementById("shutdown-toggle");
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/general", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                general_data = JSON.parse(this.responseText);
+                site_title.innerText = general_data.site_title;
+                site_about.innerText = general_data.site_about;
+                site_title_inp.value = general_data.site_title;
+                site_about_inp.value = general_data.site_about;
+                if (general_data.shutdown == 1) {
+                    shutdown_toggle.checked = true;
+                    shutdown_toggle.value = 1;
+                }
+                else {
+                    shutdown_toggle.checked = false;
+                    shutdown_toggle.value = 0;
+                }
+                // location.reload();
+            }
+            xhr.send();
+        }
+
+        general_s_form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            data = {
+                id: 1,
+                site_title: site_title_inp.value,
+                site_about: site_about_inp.value,
+                shutdown: parseInt(document.getElementById('shutdown-toggle').value)
+            }
+            upd_general(data);
+        });
+
+        //Reload data
+        function upd_general(data) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/admin/settings/general", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                var myModal = document.getElementById('general-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+                location.reload();
+            }
+            xhr.send(JSON.stringify(data));
+        }
+        function upd_shutdown(val) {
+            let valshut = 0;
+            if (parseInt(val) === 0) {
+                valshut = parseInt(val) + 1;
+            }
+            else {
+                valshut = parseInt(val) - 1;
+            }
+            data = {
+                id: 1,
+                site_title: document.getElementById("site_title").innerText,
+                site_about: document.getElementById("site_about").innerText,
+                shutdown: valshut
+            }
+            console.log(JSON.stringify(data));
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/admin/settings/general", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (val == 0) {
+                    alert("Shutdown mode is on");
+                }
+                else {
+                    alert("Shutdown mode is off");
+                }
+                get_general();
+            }
+            xhr.send(JSON.stringify(data));
+        }
+
+        function get_contacts() {
+            let contacts_p_id = ['address', 'gmap', 'pn1', 'pn2', 'email', 'fb', 'insta', 'tw'];
+            let iframe = document.getElementById('iframe');
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/contact", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                console.log("here");
+                contacts_data = JSON.parse(this.responseText);
+                console.log(contacts_data);
+                contacts_data = Object.values(contacts_data);
+
+                for (i = 0; i < contacts_p_id.length; i++) {
+                    document.getElementById(contacts_p_id[i]).innerText = contacts_data[i + 1];
+                }
+                iframe.src = contacts_data[9];
+                contacts_inp(contacts_data);
+            }
+            xhr.send();
+        }
+        function contacts_inp(data) {
+            let contacts_inp_id = ['address_inp', 'gmap_inp', 'pn1_inp', 'pn2_inp', 'email_inp', 'fb_inp', 'insta_inp', 'tw_inp', 'iframe_inp'];
+
+            for (i = 0; i < contacts_inp_id.length; i++) {
+                document.getElementById(contacts_inp_id[i]).value = data[i + 1];
+            }
+        }
+
+        contacts_s_form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            upd_contacts();
+        });
+
+        function upd_contacts() {
+            let contacts_inp_id = ['address_inp', 'gmap_inp', 'pn1_inp', 'pn2_inp', 'email_inp', 'fb_inp', 'insta_inp', 'tw_inp', 'iframe_inp'];
+
+            data = {
+                id: 1,
+                address: document.getElementById('address_inp').value,
+                gmap: document.getElementById('gmap_inp').value,
+                pn1: document.getElementById('pn1_inp').value,
+                pn2: document.getElementById('pn2_inp').value,
+                email: document.getElementById('email_inp').value,
+                fb: document.getElementById('fb_inp').value,
+                insta: document.getElementById('insta_inp').value,
+                tw: document.getElementById('tw_inp').value,
+                iframe: document.getElementById('iframe_inp').value,
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/admin/settings/contact", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                var myModal = document.getElementById('contacts-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+                location.reload();
+            }
+            xhr.send(JSON.stringify(data));
+        }
+
+        team_s_form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            add_member();
+        });
+
+
+        const fileInput = document.querySelector('input[type="file"]');
+        fileInput.addEventListener('change', (event) => {
+            let btn = document.getElementById("btn_add_member");
+            btn.setAttribute("disabled", true);
+            const file = event.target.files[0];
+            const fileSize = file.size; // lấy kích thước tệp
+            const fileType = file.type; // lấy loại tệp
+
+            // kiểm tra kích thước tệp
+            if (fileSize > 1024 * 1024) {
+                alert('Tệp quá lớn, vui lòng chọn một tệp nhỏ hơn 1MB');
+                return;
+            }
+            else {
+                btn.removeAttribute('disabled');
+            }
+        });
+
+
+        function add_member() {
+            let data = new FormData();
+            data.append('name', member_name_inp.value);
+            data.append('picture', member_picture_inp.files[0]);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/admin/settings/management_team", true);
+            xhr.onload = function () {
+                var myModal = document.getElementById('team-s');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+                alert('success');
+                member_name_inp.value = '';
+                member_picture_inp.value = '';
+                location.reload();
+            }
+            xhr.send(data);
+        }
+
+
+        function get_members() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/management_team", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            document.getElementById("team-data").innerHTML = "";
+            xhr.onload = function () {
+                resultArray = JSON.parse(this.responseText);
+                for (var i = 0; i < resultArray.length; i++) {
+                    var obj = resultArray[i];
+                    var htmlString = `
+                                        <div class="col-md-2 mb-3">
+                                            <div class="card bg-dark text-white">
+                                                <img src='http://localhost:8080/getimage/${obj.picture}'  class="card-img">
+                                                <div class="card-img-overlay text-end">
+                                                    <button type="button" onclick="rem_member(${obj.id})" class="btn btn-danger btn-sm shadow-none">
+                                                        <i class="bi bi-trash"></i> Delete
+                                                    </button>
+                                                </div>
+                                                <p class="card-text text-center px-3 py-2">${obj.name}</p>
+                                            </div>
+                                        </div>
+                                    `;
+                    document.getElementById("team-data").innerHTML += htmlString
+                }
+            }
+            xhr.send();
+        }
+
+        function rem_member(val) {
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "http://localhost:8080/admin/settings/management_team", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                get_members();
+            }
+            xhr.send(JSON.stringify(val));
+        }
+        window.onload = function () {
+            get_general();
+            get_contacts();
+            get_members();
+        }
+    </script>
+</body>
+
+</html>

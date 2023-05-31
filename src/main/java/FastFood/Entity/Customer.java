@@ -60,6 +60,7 @@ public class Customer {
 		this.address = address;
 		this.user_id = user_id;
 	}
+	
 	public Customer() {
 	}
 	

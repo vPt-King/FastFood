@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/admin/style.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5" style="background-color: #26cc00 !important;">
+            <div class="col-lg-6 d-none d-lg-block">
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="d-inline-flex align-items-center" style="color: white !important;">
+                        <a class="text-dark px-2" href="https://www.facebook.com">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="https://twitter.com">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <a class="text-dark px-2" href="https://www.instagram.com">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">Fast</span>Food</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for your product">
+                        <div class="input-group-append">
+                            <button class="input-group-text bg-transparent text-primary"
+                                style="color:black !important; ">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                </a>
+                <a href="/cart" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+                    data-toggle="collapse" href="#navbar-vertical"
+                    style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                    <h6 class="m-0" style="color:#fff !important;">Categories</h6>
+                    <i class="fa fa-angle-down text-dark"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
+                    id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px" id="show-category">
+
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                                class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/" class="nav-item nav-link">Home</a>
+                            <a href="shop.html" class="nav-item nav-link">Shop</a>
+                            <div class="nav-item dropdown">
+                            </div>
+                            <a href="/contact" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0" id="show-login-register-logout">
+                            <!-- <a href="/login" class="nav-item nav-link">Login</a>
+                                <a href="/login" class="nav-item nav-link">Register</a> -->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shopping Cart</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Cart Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle" id="show-products">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <form class="mb-5" action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Apply Coupon</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Subtotal</h6>
+                            <h6 class="font-weight-medium" id="subtotal"></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium"id="shipping">$10</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold" id="total"></h5>
+                        </div>
+                        <button class="btn btn-block btn-primary my-3 py-3" onclick="ProcessOrder()">Proceed To Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-white mt-5">
+        <div class="row">
+            <div class="col-lg-4 p-4">
+                <h3 class="h-font fw-bold fs-3 mb-2">
+                    FASTFOOD
+                </h3>
+                <p id="about_us">
+
+                </p>
+            </div>
+
+            <div class="col-lg-4 p-4">
+                <h5 class="mb-3">
+                    Links
+                </h5>
+                <a href="/" class="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br>
+                <a href="/shop" class="d-inline-block mb-2 text-dark text-decoration-none">Shop</a><br>
+                <a href="/contact" class="d-inline-block mb-2 text-dark text-decoration-none">Contact us</a><br>
+            </div>
+
+            <div class="col-lg-4 p-4">
+                <h5 class="mb-3">Follow us</h5>
+                <a href="https://twitter.com" class="d-inline-block mb-3">
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-twitter me-1"></i>Twitter
+                    </span>
+                </a>
+                <br>
+                <a href="https://www.facebook.com" class="d-inline-block mb-3">
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-facebook me-1"></i>Facebook
+                    </span>
+                </a>
+                <br>
+                <a href="https://www.instagram.com" class="d-inline-block mb-3">
+                    <span class="badge bg-light text-dark fs-6 p-2">
+                        <i class="bi bi-instagram me-1"></i>Instagram
+                    </span>
+                </a>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+        const shipping = 10;
+        let plusButtons = null;
+        let minusButtons =null;
+        function get_category() {
+            let xhr = new XMLHttpRequest()
+            xhr.open("GET", "http://localhost:8080/admin/category", true);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.onload = function () {
+                document.getElementById("show-category").innerHTML = "";
+                let res = JSON.parse(this.responseText);
+                res.forEach(item => {
+                    let htmlString = `
+                        <a href="/products_category?id=${item.id}" class="nav-item nav-link">${item.name}</a>
+                        `;
+                    document.getElementById("show-category").innerHTML += htmlString;
+                });
+            }
+            xhr.send();
+        }
+        function get_general() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/general", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                general_data = JSON.parse(this.responseText);
+                document.getElementById("about_us").innerHTML = general_data.site_about;
+            }
+            xhr.send();
+        }
+        function login_register_logout() {
+            var cookieExists = checkCookie('isUser');
+            document.getElementById("show-login-register-logout").innerHTML = "";
+            console.log(cookieExists);
+            if (cookieExists) {
+
+                document.getElementById("show-login-register-logout").innerHTML += `
+                    <a href="" onclick="logout('isUser')" class="nav-item nav-link">Logout</a>
+                    `;
+            }
+            else {
+                document.getElementById("show-login-register-logout").innerHTML += `
+                    <a href="/login" class="nav-item nav-link">Login</a>
+                    <a href="/register" class="nav-item nav-link">Register</a>
+                    `;
+            }
+        }
+        function logout(cookieName) {
+            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            localStorage.removeItem("cartItems");
+            localStorage.removeItem("orderPrice");
+            location.reload();
+        }
+        function checkCookie(cookieName) {
+            var cookies = document.cookie.split(';'); // Get all cookies as an array
+
+            // Loop through the cookies to find the desired one
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim(); // Remove leading/trailing whitespace
+
+                // Check if the cookie starts with the desired name
+                if (cookie.indexOf(cookieName + '=') === 0) {
+                    return true; // Cookie exists
+                }
+            }
+
+            return false; // Cookie does not exist
+        }
+        function show_products() {
+            document.getElementById('show-products').innerHTML = "";
+            var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+            var total1 = 0;
+            var subtotal  = 0;
+            cartItems.forEach(function (item) {
+                var total = item.quantity * item.price;
+                subtotal += total;
+                htmlString = `
+                <tr>
+                            <td class="align-middle">${item.name}</td>
+                            <td class="align-middle" id="price-${item.id}">$${item.price}</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus" id="minus-${item.id}">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center input-quantity" id="input-${item.id}"
+                                        value="${item.quantity}">
+                                    <input type="hidden" id="product-quantity-${item.id}" value="${item.product_quantity}">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus" id="plus-${item.id}">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle subtotalcart" id="total-${item.id}">$${total}</td>
+                            <td class="align-middle"><button class="btn btn-sm btn-primary" onclick="DelProduct(${item.id})"><i
+                                        class="fa fa-times"></i></button></td>
+                        </tr>
+                `;
+                document.getElementById("show-products").innerHTML += htmlString;
+            })
+            total1 = subtotal + 10;
+            document.getElementById("total").innerHTML = "$" + total1
+            document.getElementById("subtotal").innerHTML = "$" + subtotal
+            plusButtons = document.querySelectorAll('.btn-plus');
+            minusButtons = document.querySelectorAll('.btn-minus');
+            inputsQuantity = document.querySelectorAll('.input-quantity');
+            inputsQuantity.forEach(function(input) {
+                input.addEventListener('change',function(e) {
+                    const itemId = parseInt(input.id.split('-')[1]); 
+                    var product_quantity = document.getElementById(`product-quantity-${itemId}`).value;
+                    if(e.target.value > product_quantity)
+                    {
+                        input.value = product_quantity;
+                        alert("product exceeded quantity");
+                    }
+                    const priceHtml = document.getElementById(`price-${itemId}`).innerHTML;
+                    var price = parseFloat(priceHtml.slice(1));
+                    const total = document.getElementById(`total-${itemId}`);
+                    total.innerHTML = "$"+ price*input.value;
+                    resetTotal();
+                    resetLocalStorage();
+                })
+            })
+            AddEvent();
+        }
+        function AddEvent(){
+            plusButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const itemId = button.id.split('-')[1]; 
+                    const input = document.querySelector(`#input-${itemId}`);
+                    const priceHtml = document.getElementById(`price-${itemId}`).innerHTML;
+                    var price = parseFloat(priceHtml.slice(1));
+                    const currentValue = parseFloat(input.value);
+                    input.value = currentValue + 1; 
+                    const total = document.getElementById(`total-${itemId}`);
+                    total.innerHTML = "$"+price*input.value;
+                    resetTotal();
+                    resetLocalStorage();
+                });
+            });
+    
+            minusButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const itemId = button.id.split('-')[1]; 
+                    const input = document.querySelector(`#input-${itemId}`);
+                    const currentValue = parseFloat(input.value);
+                    const priceHtml = document.getElementById(`price-${itemId}`).innerHTML;
+                    var price = parseFloat(priceHtml.slice(1));
+                    if (currentValue > 0) {
+                        input.value = currentValue - 1; 
+                        const total = document.getElementById(`total-${itemId}`);
+                        total.innerHTML = "$"+price*input.value;
+                        resetTotal();
+                        resetLocalStorage();
+                    }
+                });
+            });
+        }
+        function resetTotal()
+        {
+            let total = 0;
+            let subtotals = document.querySelectorAll(`.subtotalcart`);
+            subtotals.forEach(function(subtotal){
+                let price = parseFloat(subtotal.innerHTML.slice(1));
+                total += price;
+            });
+            document.getElementById("subtotal").innerHTML = "$" + total;
+            document.getElementById("total").innerHTML = "$" + (total + shipping) ;
+        }
+        function resetLocalStorage(){
+            var cartItems = JSON.parse(localStorage.getItem("cartItems"));
+            cartItems.forEach(function(item){
+                var itemId = item.id;
+                item.quantity = parseInt(document.getElementById(`input-${itemId}`).value);
+            })
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+        function DelProduct(id){
+            var cartItems = JSON.parse(localStorage.getItem("cartItems"));
+            for(var i = 0; i < cartItems.length; i++)
+            {
+                if(cartItems[i].id == id)
+                {
+                    cartItems.splice(i,1);
+                    break;
+                }
+            }
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            window.location.reload();
+        }
+        function ProcessOrder()
+        {
+            var subTotal = parseFloat(document.getElementById("subtotal").innerHTML.slice(1));
+            var total = parseFloat(document.getElementById("total").innerHTML.slice(1));
+            var orderPrice = {
+                subTotal:subTotal,
+                shipping:shipping,
+                total:total
+            }
+            orderPrices = [];
+            orderPrices.push(orderPrice);
+            localStorage.setItem("orderPrice", JSON.stringify(orderPrice));
+            window.location.href = "http://localhost:3000/checkout";
+        }
+        window.onload = function () {
+            login_register_logout();
+            get_category();
+            get_general();
+            show_products();
+        }
+    </script>
+</body>
+
+</html>

@@ -172,7 +172,7 @@ a {
 }
 
 a:hover {
-    color: #ba6a62;
+    color: #26cc00;
     text-decoration: underline;
 }
 
@@ -2010,12 +2010,12 @@ pre code {
 }
 
 .table-hover .table-danger:hover {
-    background-color: #f1b0b7;
+    background-color: #26cc00;
 }
 
 .table-hover .table-danger:hover>td,
 .table-hover .table-danger:hover>th {
-    background-color: #f1b0b7;
+    background-color: #26cc00;
 }
 
 .table-light,
@@ -2716,15 +2716,15 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #c5837c;
-    border-color: #c17a74;
+    background-color: #26cc00;
+    border-color: #26cc00;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
     color: #fff;
-    background-color: #c5837c;
-    border-color: #c17a74;
+    background-color: #26cc00;
+    border-color: #26cc00;
     box-shadow: 0 0 0 0.2rem rgba(183, 138, 135, 0.5);
 }
 
@@ -2739,8 +2739,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #c17a74;
-    border-color: #bd726b;
+    background-color: #26cc00;
+    border-color: #26cc00;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -3331,7 +3331,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link:hover {
-    color: #ba6a62;
+    color: #26cc00;
     text-decoration: underline;
 }
 
@@ -5194,7 +5194,7 @@ a.badge:focus {
 a.badge-primary:hover,
 a.badge-primary:focus {
     color: #212529;
-    background-color: #c17a74;
+    background-color: #26cc00;
 }
 
 a.badge-primary:focus,
@@ -5444,7 +5444,7 @@ a.badge-dark.focus {
 }
 
 .alert-danger hr {
-    border-top-color: #f1b0b7;
+    border-top-color: #26cc00;
 }
 
 .alert-danger .alert-link {
@@ -5796,7 +5796,7 @@ a.badge-dark.focus {
 .list-group-item-danger.list-group-item-action:hover,
 .list-group-item-danger.list-group-item-action:focus {
     color: #721c24;
-    background-color: #f1b0b7;
+    background-color: #26cc00;
 }
 
 .list-group-item-danger.list-group-item-action.active {
@@ -6699,7 +6699,7 @@ a.bg-primary:hover,
 a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-    background-color: #c17a74 !important;
+    background-color: #26cc00 !important;
 }
 
 .bg-secondary {

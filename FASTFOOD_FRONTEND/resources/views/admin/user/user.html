@@ -91,13 +91,44 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
-
-
+                                
+                             <li class="nav-item">
+                                <a href="/admin" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/settings" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Settings
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/carousel" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Carousel
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/user-queries" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        User Queries
+                                    </p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="/admin/category" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
-                                        category
+                                        Category
                                        
                                     </p>
                                 </a>
@@ -167,6 +198,20 @@
                                 <a class="btn btn-success float-right m-2" href="/admin/more-user">
                                     Add
                                 </a>
+                                
+                            <form action="POST" class="form-inline" id="search-form">
+                                <div class="form-group mr-2">
+                                    <select name="searchOption" id="search_options" class="form-control">
+                                        <option value="id">Search by ID</option>
+                                        <option value="gmail">Search by Gmail</option>
+                                        <option value="name">Search by Name</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mr-2">
+                                    <input type="text" name="searchQuery" id="search_input" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                            </form>
                             </div>
                             <div class = "col-md-12">
                                 <table class="table">
@@ -182,19 +227,7 @@
                                     </thead>
 
                                     <tbody id="show_user">
-                                        <!-- <c:forEach var="item" items="${list}" varStatus="loop">
-                                            <tr>
-                                                <th>${item.id}</th>
-                                                <td>${item.gmail}</td>
-                                                <td>${item.name}</td>
-                                                <td>${item.phone}</td>
-                                                <td>${item.address}</td>
-                                                <td>
-                                                    <a href="/admin/editUser?id=${item.id}" class ="btn btn-default">Edit</a>
-                                                    <a class = "btn btn-danger" data-toggle="modal" data-target="#delete-user" data-id="${item.id}">Delete</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach> -->
+                                       
                                     </tbody>
                                 </table>
                             </div>
@@ -257,6 +290,64 @@
         
     </form>
     <script>
+        let search_form = document.getElementById("search-form")
+        search_form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        Search();
+    });
+    function Search() {
+        var selectedOption = document.getElementById("search_options").value;
+        var searchQuery = document.getElementById("search_input").value;
+        if(searchQuery == "")
+        {
+            alert("Please fill search input");
+        }
+        else{
+        let isOke = 1;
+        let mess = "";
+        if (selectedOption == "id") {
+            var number = parseInt(searchQuery);
+            if (number > 0) {
+            }
+            else {
+                isOke = 0;
+                mess = "This is not a integer number";
+            }
+        }
+        if (isOke == 1) {
+            data = {
+                option: selectedOption,
+                value: searchQuery
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8080/admin/search-user", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                    let res = JSON.parse(this.responseText);
+                    document.getElementById("show_user").innerHTML = "";
+                    res.forEach(item => {
+                        let htmlString = `
+                        <tr>
+                                                <th>${item.id}</th>
+                                                <td>${item.gmail}</td>
+                                                <td>${item.name}</td>
+                                                <td>${item.phone}</td>
+                                                <td>${item.address}</td>
+                                                <td>
+                                                    <a href="/admin/edit-user?id=${item.id}" class ="btn btn-default">Edit</a>
+                                                    <a class = "btn btn-danger" data-toggle="modal" data-target="#delete-user" data-id="${item.id}">Delete</a>
+                                                </td>
+                                            </tr>`
+                                            document.getElementById("show_user").innerHTML += htmlString;
+                    });
+            }
+            xhr.send(JSON.stringify(data));
+        }
+        else {
+            alert(mess);
+        }
+    }
+    }
         function get_all_user()
         {
             let xhr = new XMLHttpRequest();
@@ -272,10 +363,12 @@
             document.getElementById("show_user").innerHTML = "";
             data.forEach(item => {
                 let htmlString = `
-                <tr>
+                                            <tr>
                                                 <th>${item.id}</th>
                                                 <td>${item.gmail}</td>
-                                                <td>${item.name}</td>
+                                                <td>
+                                                    <a href="/admin/customer-of-user?id=${item.id}">${item.name}</a>
+                                                </td>
                                                 <td>${item.phone}</td>
                                                 <td>${item.address}</td>
                                                 <td>

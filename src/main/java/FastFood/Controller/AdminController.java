@@ -40,16 +40,29 @@ import FastFood.Entity.Customer;
 import FastFood.Entity.Order;
 import FastFood.Entity.Order_Product;
 import FastFood.Entity.Product;
+import FastFood.Entity.Search;
 import FastFood.Entity.User;
 import FastFood.Entity.User_Customer;
 import FastFood.Entity.Whole;
 import FastFood.Model.LoginResponse;
 import FastFood.Model.PutResponse;
 import FastFood.Model.RegisterResponse;
-//import HotelBooking.Dao.RoomsDAO;
-//import HotelBooking.Entity.Rooms;
+import FastFood.DAO.User_queriesDAO;
+import FastFood.Entity.User_queries;
+import FastFood.Model.MessResponse;
+import FastFood.DAO.Team_detailsDAO;
+import FastFood.Entity.Team_details;
+import FastFood.DAO.Contact_detailsDAO;
+import FastFood.DAO.SettingsDAO;
+import FastFood.Entity.Contact_details;
+import FastFood.Entity.Settings;
+import FastFood.DAO.CarouselDAO;
+import FastFood.Entity.Carousel;
+//import FastFood.DAO.RoomsDAO;
+//import FastFood.Entity.Rooms;
 import FastFood.Model.InsertResponse;
 import FastFood.Model.DeleteResponse;
+import FastFood.Service.*;
 @RestController
 @CrossOrigin(origins = 
 		{"http://localhost:3000/admin/login",
@@ -59,6 +72,8 @@ import FastFood.Model.DeleteResponse;
 		"http://localhost:3000/admin/edit-category",
 		"http://localhost:3000/admin/delete-category",
 		"http://localhost:3000/admin/edit-product",
+		"http://localhost:3000/admin/contact",
+		"http://localhost:3000/"
 		})
 @RequestMapping(value="/admin")
 public class AdminController {
@@ -207,6 +222,38 @@ public class AdminController {
 		}
 		return ResponseEntity.badRequest().build();
 	}
+	@PostMapping("/carousel")
+	public ResponseEntity<String> InsertNewCarousel(MultipartHttpServletRequest request)
+	{
+		MultipartFile photo = request.getFile("picture");
+		String photoName = photo.getOriginalFilename();
+		Path path = Paths.get("uploads/");
+		try {
+		    InputStream is = photo.getInputStream();
+		    Files.copy(is,path.resolve(photo.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
+		    }
+		catch(Exception e)
+		    {
+		    	System.out.println("no");
+		    }
+		CarouselDAO carouselDAO = new CarouselDAO();
+		int k = carouselDAO.InsertNewCarousel(new Carousel(photoName));
+		return ResponseEntity.ok("1");
+	}
+	
+	@GetMapping("/carousel")
+	public List<Carousel> GetListCarousel()
+	{
+		CarouselDAO carouselDAO = new CarouselDAO();
+		return carouselDAO.FindAllCarousel();
+	}
+	@DeleteMapping("/carousel")
+	public void DeleteCarousel(@RequestBody Carousel carousel)
+	{
+		CarouselDAO carouselDAO = new CarouselDAO();
+		carouselDAO.DeleteCarouselById(carousel);
+	}
+	
 	
 	@GetMapping("/product")
 	public List<Product> GetAllProduct()
@@ -274,11 +321,21 @@ public class AdminController {
 		Gson gson = new Gson();
 		InsertResponse ir = null;
 		int id = Integer.parseInt(request.getParameter("id"));
+		int change = Integer.parseInt(request.getParameter("change"));
 	    String name = request.getParameter("name");
 	    String description = request.getParameter("description");
 	    int quantity = Integer.parseInt(request.getParameter("quantity"));
 	    double price = Double.parseDouble(request.getParameter("price"));
 	    int category_id = Integer.parseInt(request.getParameter("category_id"));
+	    if(change == 0)
+	    {
+	    	Product p = new Product(id,name,description,quantity,price,category_id);
+	    	ProductDAO pDAO = new ProductDAO();
+	    	int k = pDAO.EditProductByIdNoImage(p);
+		    ir = new InsertResponse(1,"edit success");
+		    String json = gson.toJson(ir);
+	 	    return new ResponseEntity<String>(json,HttpStatus.OK);
+	    }else {
 	    MultipartFile photo = request.getFile("picture");
 	    String photoName = photo.getOriginalFilename();
 	    Path path = Paths.get("uploads/");
@@ -295,6 +352,7 @@ public class AdminController {
 	    ir = new InsertResponse(1,"edit success");
 	    String json = gson.toJson(ir);
  	    return new ResponseEntity<String>(json,HttpStatus.OK);   
+	    }
 	}
 	
 	@DeleteMapping("/delete-product")
@@ -434,6 +492,23 @@ public class AdminController {
 		
 	}
 	
+	@PostMapping("/get-all-customer")
+	public List<User_Customer> GetAllCustomerOfUser(@RequestBody User user)
+	{
+		CustomerDAO cDAO = new CustomerDAO();
+		List<Customer> listCustomer = cDAO.GetAllCustomerOfUser(user.getId());
+		UserDAO uDAO = new UserDAO();
+		User u = uDAO.GetUserDetailById(user.getId());
+		List<User_Customer> listWhole = new ArrayList<>();
+		for(Customer c : listCustomer)
+		{
+			User_Customer w = new User_Customer(c,u);
+			listWhole.add(w);
+		}
+		return listWhole;
+		
+	}
+	
 	@PostMapping("/get-customer-detail")
 	public Customer GetCustomerDetail(@RequestBody Customer customer)
 	{
@@ -523,6 +598,19 @@ public class AdminController {
 		Gson gson = new Gson();
 		DeleteResponse dr = null;
 		OrderDAO oDAO = new OrderDAO();
+		Order t = oDAO.GetOrderById(o.getId());
+		if(t.getStatus() == 0)
+		{
+			Order_ProductDAO opDAO = new Order_ProductDAO();
+			List<Order_Product> listop = opDAO.GetListOrder_ProductByOrderId(o.getId());
+			ProductDAO pDAO = new ProductDAO();
+			for(Order_Product op:listop)
+			{
+				Product p = pDAO.FindProductById(op.getProduct_id());
+				int sl = p.getQuantity() + op.getQuantity();
+				pDAO.ChangeProductQuantity(sl, p.getId());
+			}
+		}
 		int k = oDAO.DeleteOrderById(o);
 		if(k == 1)
 		{
@@ -534,4 +622,233 @@ public class AdminController {
 		String json = gson.toJson(dr);
 		return new ResponseEntity<String>(json,HttpStatus.OK);
 	}
+	@GetMapping("/settings/general")
+	public Settings GetGeneral()
+	{
+		SettingsDAO settingsDAO = new SettingsDAO();
+		Settings settings = settingsDAO.GetSettingsById(1);
+		return settings;
+	}
+	
+	@PostMapping("/settings/general")
+	public void UpdateGeneral(@RequestBody Settings settings)
+	{
+		SettingsDAO settingsDAO = new SettingsDAO();
+		settingsDAO.UpdateSettings(settings);
+	}
+	@GetMapping("/settings/contact")
+	public Contact_details GetContact_details()
+	{
+		Contact_detailsDAO contact_detailsDAO = new Contact_detailsDAO();
+		Contact_details contact_details = contact_detailsDAO.GetContact_detailsById(1);
+		return contact_details;
+	}
+	
+	@PostMapping("/settings/contact")
+	public void UpdateContact_details(@RequestBody Contact_details contact_details)
+	{
+		Contact_detailsDAO contact_detailsDAO = new Contact_detailsDAO();
+		contact_detailsDAO.UpdateContact_details(contact_details);
+	}
+	
+
+	@GetMapping("/settings/management_team")
+	public List<Team_details> GetTeamDetails()
+	{
+		Team_detailsDAO team_detailsDAO = new Team_detailsDAO();
+		return team_detailsDAO.GetAllTeam_detailsMember();
+	}
+	
+	
+	@PostMapping("/settings/management_team")
+	public ResponseEntity<String> handleManagementRequest(MultipartHttpServletRequest request) throws IOException {
+	    String name = request.getParameter("name");	    
+	    MultipartFile photo = request.getFile("picture");
+	    String photoName = photo.getOriginalFilename();
+	    Path path = Paths.get("uploads/");
+	    try {
+	    InputStream is = photo.getInputStream();
+	    Files.copy(is,path.resolve(photo.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
+	    }catch(Exception e)
+	    {
+	    	System.out.println("no");
+	    }
+	    Team_detailsDAO team_detailsDAO = new Team_detailsDAO();
+	    team_detailsDAO.InsertTeamDetails(name, photoName);
+	    return ResponseEntity.ok("1");
+	}
+
+	@DeleteMapping("/settings/management_team")
+	public void DeleteTeam_details(@RequestBody int id)
+	{
+		Team_detailsDAO team_detailsDAO = new Team_detailsDAO();
+		team_detailsDAO.DeleteTeam_detailsById(id);
+	}
+	@PostMapping("/user-queries")
+	public ResponseEntity<String> InsertNewUser_queries(@RequestBody User_queries uq)
+	{
+		Gson gson = new Gson();
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		int k = uqDAO.InsertNewUser_queries(uq);
+		MessResponse mr = null;
+		if(k != 1)
+		{
+			mr = new MessResponse(0,"Error occure !! Cannot send email");
+		}
+		else {
+			mr = new MessResponse(1,"Send email ok");
+		}
+		String json = gson.toJson(mr);
+		return new ResponseEntity<String>(json,HttpStatus.OK);
+	}
+	
+	@GetMapping("/user-queries")
+	public List<User_queries> GetListUser_queries()
+	{
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		return uqDAO.GetAllUser_queries();
+	}
+	
+	@PutMapping("/user-queries")
+	public ResponseEntity<String> MarkAsRead(@RequestBody User_queries uq)
+	{
+		Gson gson = new Gson();
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		int k = uqDAO.ChangeSeenStatus(uq);
+		MessResponse mr = null;
+		if(k != 1)
+		{
+			mr = new MessResponse(0,"Cannot mark as read");
+		}
+		else {
+			mr = new MessResponse(1,"Mark as read");
+		}
+		String json = gson.toJson(mr);
+		return new ResponseEntity<String>(json, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/user-queries")
+	public ResponseEntity<String> DeleteUser_queries(@RequestBody User_queries uq)
+	{
+		Gson gson = new Gson();
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		int k = uqDAO.DeleteUser_queries(uq);
+		MessResponse mr = null;
+		if(k != 1)
+		{
+			mr = new MessResponse(0,"Cannot delete");
+		}
+		else {
+			mr = new MessResponse(1,"delete success");
+		}
+		String json = gson.toJson(mr);
+		return new ResponseEntity<String>(json, HttpStatus.OK);
+	}
+	
+	@PutMapping("/user-queries/all")
+	public ResponseEntity<String> MarkAsReadAll()
+	{
+		Gson gson = new Gson();
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		int k = uqDAO.ChangeAllSeenStatus();
+		MessResponse mr = null;
+		if(k != 1)
+		{
+			mr = new MessResponse(0,"Cannot mark all as read");
+		}
+		else {
+			mr = new MessResponse(1,"Mark all as read");
+		}
+		String json = gson.toJson(mr);
+		return new ResponseEntity<String>(json, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/user-queries/all")
+	public ResponseEntity<String> DeleteAllUser_queries()
+	{
+		Gson gson = new Gson();
+		User_queriesDAO uqDAO = new User_queriesDAO();
+		int k = uqDAO.DeleteAllUser_queries();
+		MessResponse mr = null;
+		if(k != 1)
+		{
+			mr = new MessResponse(0,"Cannot delete all");
+		}
+		else {
+			mr = new MessResponse(1,"delete all success");
+		}
+		String json = gson.toJson(mr);
+		return new ResponseEntity<String>(json, HttpStatus.OK);
+	}
+	
+	@PostMapping("/search-product-by-id")
+	public Product SearchProduct(@RequestBody Search s)
+	{
+		SearchProduct sp = new SearchProduct();
+		return sp.SearchProductById(Integer.parseInt(s.getValue()));
+	}
+	
+	
+	@PostMapping("/search-list-product")
+	public List<Product> SearchListProduct(@RequestBody Search s)
+	{
+		SearchProduct sp = new SearchProduct();
+		if(s.getOption().equals("category"))
+		{
+			return sp.SearchProductByCategory(s.getValue());
+		}
+		else if(s.getOption().equals("name"))
+		{
+			return sp.SearchProductByAString(s.getValue());
+		}
+		else if(s.getOption().equals("price"))
+		{
+			return sp.findClosestProducts(Double.parseDouble(s.getValue()));
+		}
+		return null;
+	}
+	@PostMapping("/search-user")
+	public List<User> SearchListUser(@RequestBody Search s)
+	{
+		SearchUser su = new SearchUser();
+		if(s.getOption().equals("id"))
+		{
+			return su.SearchUserById(Integer.parseInt(s.getValue()));
+		}
+		else if(s.getOption().equals("gmail"))
+		{
+			return su.SearchUserByGmail(s.getValue());
+		}
+		else if(s.getOption().equals("name"))
+		{
+			return su.SearchUserByName(s.getValue());
+		}
+		else if(s.getOption().equals("phone"))
+		{
+			return su.SearchUserByPhone(s.getValue());
+		}
+		else if(s.getOption().equals("address"))
+		{
+			return su.SearchUserByAddress(s.getValue());
+		}
+		return null;
+	}
+//	@PostMapping("/carousel")
+//	public ResponseEntity<String> InsertNewCarousel(MultipartHttpServletRequest request)
+//	{
+//		MultipartFile photo = request.getFile("picture");
+//		String photoName = photo.getOriginalFilename();
+//		Path path = Paths.get("uploads/");
+//		try {
+//		    InputStream is = photo.getInputStream();
+//		    Files.copy(is,path.resolve(photo.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
+//		    }
+//		catch(Exception e)
+//		    {
+//		    	System.out.println("no");
+//		    }
+//		CarouselDAO carouselDAO = new CarouselDAO();
+//		int k = carouselDAO.InsertNewCarousel(new Carousel(photoName));
+//		return ResponseEntity.ok("1");
+//	}
 }

@@ -32,7 +32,7 @@ public class UserDAO {
 			ps.setString(6, user.getAddress());
 			k=ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			k = 0;
 			e.printStackTrace();
 		}
 		return k;
@@ -192,5 +192,61 @@ public class UserDAO {
 		}
 		return k;
 	}
-	
+
+	public int CheckIfUseAccountLogin(User user) {
+		int k = 1;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from user where gmail = ? and password = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setString(1, user.getGmail());
+			ps.setString(2,user.getPassword());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				k = rs.getInt("id");
+			}
+			else {
+				k = -1;
+			}
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			k=-1;
+			e.printStackTrace();
+		}
+		return k;
+	}
+
+	public int CheckIfUserIsExisted(User user) {
+		int k = 1;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from user where gmail = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setString(1, user.getGmail());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				k = 1;
+			}
+			else {
+				k = 0;
+			}
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			k=0;
+			e.printStackTrace();
+		}
+		return k;
+	}
+
+	public User GetUserDetailByIdNoGmail(int user_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

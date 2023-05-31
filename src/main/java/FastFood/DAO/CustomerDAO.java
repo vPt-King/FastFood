@@ -176,4 +176,67 @@ public class CustomerDAO {
 		}
 		return k;
 	}
+
+	public List<Customer> GetAllCustomerOfUser(int id) {
+		
+		List<Customer> customer = new ArrayList<>();
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from customer where user_id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				customer.add(new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("phone"),rs.getString("address"),rs.getInt("user_id"),rs.getString("gmail")));
+			}
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return customer;
+	}
+
+	public int InsertNewCustomerNoGmail(Customer c) {
+		int k = 1;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "insert into customer(name,phone,address,user_id) values(?,?,?,?)";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setString(1, c.getName());
+			ps.setString(2, c.getPhone());
+			ps.setString(3, c.getAddress());
+			ps.setInt(4,c.getUser_id());
+			k=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
+	}
+	public Customer GetCustomerDetailById(int id)
+	{
+		Customer u = null;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from customer where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				u = new Customer(rs.getInt("id"),rs.getString("name"),rs.getString("phone"),rs.getString("address"),rs.getInt("user_id"));
+			}
+			rs.close();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return u;
+	}
 }

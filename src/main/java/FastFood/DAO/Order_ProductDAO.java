@@ -33,4 +33,25 @@ public class Order_ProductDAO {
 		}
 		return list;
 	}
+
+	public int InsertNewOP(int id, int orderId, int sl, Double subtotal, String description, String name) {
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "insert into order_product(product_id,order_id,quantity,sub_total,description,product_name) values(?,?,?,?,?,?)";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ps.setInt(2, orderId);
+			ps.setInt(3, sl);
+			ps.setDouble(4, subtotal);
+			ps.setString(5,description);
+			ps.setString(6,name);
+			int k = ps.executeUpdate();
+			ps.close();
+			a.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	}
 }

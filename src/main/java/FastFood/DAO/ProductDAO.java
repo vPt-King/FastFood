@@ -112,6 +112,26 @@ public class ProductDAO {
 		}
 		return k;
 	}
+	public int EditProductByIdNoImage(Product p)
+	{
+		int k = 1;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "update product set name = ?, description = ?, quantity = ?, price = ?, category_id = ? where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setString(1, p.getName());
+			ps.setString(2, p.getDescription());
+			ps.setInt(3, p.getQuantity());
+			ps.setDouble(4, p.getPrice());
+			ps.setInt(5, p.getCategory_id());
+			ps.setInt(6, p.getId());
+		    k = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return k;
+	}
 	
 	public int DeleteProductById(Product p)
 	{
@@ -150,5 +170,57 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return k;
+	}
+	public Product FindProductById(int id)
+	{
+		Product pro = null;
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from product where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{
+				pro = new Product(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("quantity"),rs.getDouble("price"),rs.getInt("category_id"),rs.getString("image"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pro;
+	}
+	public List<Product> FindProductsByCategoryId(int id)
+	{
+		List<Product> list = new ArrayList<>();
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "select * from product where category_id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				list.add(new Product(rs.getInt("id"),rs.getString("name"),rs.getString("description"),rs.getInt("quantity"),rs.getDouble("price"),rs.getInt("category_id"),rs.getString("image")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public void ChangeProductQuantity(int quantity, int id) {
+		Connection a = DBconnect.getJDBCConnection();
+		String q = "update product set quantity = ? where id = ?";
+		try {
+			PreparedStatement ps = a.prepareStatement(q);
+			ps.setInt(1, quantity);
+			ps.setInt(2, id);
+			int k = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -98,8 +98,38 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
-
-
+                        <li class="nav-item">
+                            <a href="/admin" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/settings" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Settings
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/carousel" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Carousel
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/user-queries" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    User Queries
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="/admin/category" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
@@ -176,7 +206,7 @@
                                         placeholder="Enter product name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Product Category</label>
+                                    <label id="show-category">Product Category: </label>
                                     <select class="form-control" id="product_category" name="category_id">
                                         <!-- <c:forEach var="item" items="${list}" varStatus="loop">
                                                 <option value = "${item.id}">${item.name}</option>
@@ -200,8 +230,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Product Image</label>
-                                    <input type="file" class="form-control-file" id="product_picture" name="photo"
-                                        required>
+                                    <div>
+                                        <img id="show-img" alt="">
+                                    </div>
+
+                                    <input type="file" class="form-control-file" id="product_picture" name="photo">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -241,18 +274,38 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <script>
         let edit_form = document.getElementById("edit_form");
-        edit_form.addEventListener("submit", function(e){
+        let btn_image = document.getElementById("product_picture");
+        let categories = [];
+        let change = 0;
+        btn_image.addEventListener("change", function (e) {
+            document.getElementById("show-img").setAttribute("src", "");
+            var file = e.target.files[0];
+            if (file.type.match('image.*')) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('show-img').setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+                change = 1;
+            }
+        })
+        edit_form.addEventListener("submit", function (e) {
             e.preventDefault();
             save();
         })
         function get_category() {
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost:8080/admin/category", true);
+            xhr.open("GET", "http://localhost:8080/admin/category", false);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onload = function () {
                 CategoryList = JSON.parse(this.responseText);
                 document.getElementById("product_category").innerHTML = "";
                 CategoryList.forEach(function (category) {
+                    data = {
+                        id: category.id,
+                        name: category.name
+                    }
+                    categories.push(data)
                     htmlInner = `
                     <option value = "${category.id}">${category.name}</option>
                     `;
@@ -262,46 +315,48 @@
             xhr.send();
         }
 
-        function get_product_detail()
-        {
+        function get_product_detail() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             let data = {
-                id : parseInt(id),
-                name:"",
-                description:"",
+                id: parseInt(id),
+                name: "",
+                description: "",
                 quantity: 0,
                 price: 0,
                 category_id: 0,
-                image:""
+                image: ""
             }
-            console.log(JSON.stringify(data));
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:8080/admin/get-product-detail", true);
+            xhr.open("POST", "http://localhost:8080/admin/get-product-details", false);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onload = function () {
-               let res = JSON.parse(this.responseText);
-               console.log(res);
-               document.getElementById("product_name").value = res.name;
-               document.getElementById("product_description").value  = res.description;
-               document.getElementById("product_price").value = res.price;
-               document.getElementById("product_quantity").value = res.quantity;
+                let Result =JSON.parse(this.responseText);
+                let res = Result.product;
+                document.getElementById("product_name").value = res.name;
+                document.getElementById("product_description").value = res.description;
+                document.getElementById("product_price").value = res.price;
+                document.getElementById("product_quantity").value = res.quantity;
+                document.getElementById("show-category").innerHTML += " " + Result.category.name;
+                document.getElementById("show-img").setAttribute("src", "http://localhost:8080/getimage/" + res.image);
             }
             xhr.send(JSON.stringify(data));
         }
 
-        function save()
-        {
+        function save() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             let data = new FormData();
+            data.append('change', change);
             data.append('id', parseInt(id));
             data.append('name', document.getElementById("product_name").value);
             data.append('description', document.getElementById("product_description").value);
             data.append('quantity', document.getElementById("product_quantity").value);
             data.append('price', document.getElementById("product_price").value);
             data.append('category_id', document.getElementById("product_category").value);
-            data.append('picture', document.getElementById("product_picture").files[0]);
+            if (change == 1) {
+                data.append('picture', document.getElementById("product_picture").files[0]);
+            }
             let xhr = new XMLHttpRequest();
             xhr.open("PUT", "http://localhost:8080/admin/edit-product", true);
             xhr.onload = function () {

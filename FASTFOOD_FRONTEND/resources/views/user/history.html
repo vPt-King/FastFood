@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FastFood</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../css/admin/style.css" rel="stylesheet">
+    <style>
+        .custom-shape {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .small-row {
+        max-width: 1500px; /* Kích thước tối đa của thẻ div */
+        margin: 0 auto; /* Căn giữa thẻ div */
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5" style="background-color: #26cc00 !important;">
+            <div class="col-lg-6 d-none d-lg-block">
+
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" id="fb">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" id="tw">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" id="insta">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="/" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">Fast</span>Food</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+                <form action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                <a href="" class="btn border">
+                    <i class="fas fa-heart text-primary"></i>
+                </a>
+                <a href="/cart" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+                    data-toggle="collapse" href="#navbar-vertical"
+                    style="height: 65px; margin-top: -1px; padding: 0 30px; ">
+                    <h6 class="m-0">
+                        Categories
+                    </h6>
+                    <i class="fa fa-angle-down text-dark"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light"
+                    id="navbar-vertical" style="width: calc(100% - 30px); z-index: 1;">
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px" id="show-category">
+                        <!-- <a href="" class="nav-item nav-link">Shirts</a>
+                        <a href="" class="nav-item nav-link">Jeans</a>
+                        <a href="" class="nav-item nav-link">Swimwear</a>
+                        <a href="" class="nav-item nav-link">Sleepwear</a>
+                        <a href="" class="nav-item nav-link">Sportswear</a>
+                        <a href="" class="nav-item nav-link">Jumpsuits</a>
+                        <a href="" class="nav-item nav-link">Blazers</a>
+                        <a href="" class="nav-item nav-link">Jackets</a>
+                        <a href="" class="nav-item nav-link">Shoes</a> -->
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                                class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/" class="nav-item nav-link active" style="color: black;">Home</a>
+                            <a href="shop.html" class="nav-item nav-link" id="shop-link">Shop</a>
+                            <!--                                <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
+                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                </div>
+                            </div>-->
+                            <a href="/contact" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <div class="navbar-nav ml-auto py-0" id="show-login-register-logout">
+                            <!-- <a href="/login" class="nav-item nav-link">Login</a>
+                            <a href="/login" class="nav-item nav-link">Register</a> -->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Your Order</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Order</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-10">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Your orders</span></h2>
+        </div>
+        <div class="row small-row">
+            <div class="col-12" >
+                <div class="invoice">
+                   <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Started date</th>
+                            <th scope="col">Due date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="show_orders">
+                        <!-- <tr>
+                            <td>${item.id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.customer_name}</td>
+                            <td>${item.duedate}</td>
+                            <td>${item.duedate}</td>
+                            <td>${item.duedate}</td>
+                            <td>
+                                <a href="/admin/viewOrder?id=${item.id}" class ="btn btn-default">View</a>
+                                <a class = "btn btn-danger" data-toggle="modal" data-target="#delete-order" data-id="${item.id}">Delete</a>
+                            </td>
+                        </tr> -->
+                   </tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5 bg-primary">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border border-white px-3 mr-1">Fast</span>Food</h1>
+                </a>
+                <p id="about_us1"></p>
+                <p class="mb-2" id="address1"><i class="fa fa-map-marker-alt text-primary mr-3"></i></p>
+                <p class="mb-2" id="gmail1"><i class="fa fa-envelope text-primary mr-3"></i></p>
+                <p class="mb-0" id="pn1"><i class="fa fa-phone-alt text-primary mr-3"></i></p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-3" href="/"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-3" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Shop
+                            </a>
+                            <a class="text-dark mb-3" href="/contacts"><i class="fa fa-angle-right mr-2"></i>Contact
+                            </a>
+                            <a class="text-dark mb-3" href="/login"><i class="fa fa-angle-right mr-2"></i>Login
+                            </a>
+                            <a class="text-dark mb-3" href="/register"><i
+                                    class="fa fa-angle-right mr-2"></i>Register</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Newsletter</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
+                                    required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                    required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-success btn-block py-3" type="submit">Subscribe
+                                    Now</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top border-light mx-xl-5 py-4">
+            <div class="col-md-6 px-xl-0">
+                <p class="mb-md-0 text-center text-md-left text-dark">
+                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Your Site Name</a>. All Rights Reserved.
+                    Designed
+                    by
+                    <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a><br>
+                    Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+            <div class="col-md-6 px-xl-0 text-center text-md-right">
+                <img class="img-fluid" src="img/payments.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../../lib/easing/easing.min.js"></script>
+    <script src="../../lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+        function login_register_logout() {
+            var cookieExists = checkCookie('isUser');
+            document.getElementById("show-login-register-logout").innerHTML = "";
+            console.log(cookieExists);
+            if (cookieExists) {
+
+                document.getElementById("show-login-register-logout").innerHTML += `
+                    <a href="" onclick="logout('isUser')" class="nav-item nav-link">Logout</a>
+                    `;
+            }
+            else {
+                document.getElementById("show-login-register-logout").innerHTML += `
+                    <a href="/login" class="nav-item nav-link">Login</a>
+                    <a href="/register" class="nav-item nav-link">Register</a>
+                    `;
+
+            }
+        }
+        function logout(cookieName) {
+            document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            localStorage.removeItem("cartItems");
+            localStorage.removeItem("orderPrice");
+            location.reload();
+        }
+        
+        function get_general() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/general", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                general_data = JSON.parse(this.responseText);
+                // document.getElementById("about_us").innerHTML = general_data.site_about;
+                document.getElementById("about_us1").innerHTML = general_data.site_about;
+            }
+            xhr.send();
+        }
+        function get_contacts() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8080/admin/settings/contact", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = function () {
+                contacts_data = JSON.parse(this.responseText);
+                contacts_data = Object.values(contacts_data);
+                console.log(contacts_data);
+                // document.getElementById("address").innerHTML += contacts_data[1]
+                document.getElementById("address1").innerHTML += contacts_data[1]
+                // document.getElementById("gmail").innerHTML += contacts_data[5]
+                document.getElementById("gmail1").innerHTML += contacts_data[5]
+                // document.getElementById("pn").innerHTML += contacts_data[3]
+                document.getElementById("pn1").innerHTML += contacts_data[3]
+                document.getElementById("fb").setAttribute("href", contacts_data[6])
+                document.getElementById("tw").setAttribute("href", contacts_data[8])
+                document.getElementById("insta").setAttribute("href", contacts_data[7])
+            }
+            xhr.send();
+        }
+        function checkCookie(cookieName) {
+            var cookies = document.cookie.split(';'); // Get all cookies as an array
+
+            // Loop through the cookies to find the desired one
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim(); // Remove leading/trailing whitespace
+
+                // Check if the cookie starts with the desired name
+                if (cookie.indexOf(cookieName + '=') === 0) {
+                    return true; // Cookie exists
+                }
+            }
+
+            return false; // Cookie does not exist
+        }
+        function get_category()
+        {
+            let xhr = new XMLHttpRequest()
+            xhr.open("GET", "http://localhost:8080/admin/category", true);
+            xhr.setRequestHeader("content-type", "application/json");
+            xhr.onload = function()
+            {
+                document.getElementById("show-category").innerHTML = "";
+                let res = JSON.parse(this.responseText);
+                res.forEach(item => {
+                    let htmlString = `
+                    <a href="/products_category?id=${item.id}" class="nav-item nav-link">${item.name}</a>
+                    `;
+                    document.getElementById("show-category").innerHTML += htmlString;
+                });
+            }
+            xhr.send();
+        }
+        
+        
+        function getAllCookies() {
+            var cookies = {};
+            var cookieString = document.cookie;
+            var cookieArray = cookieString.split(';');
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+                var separatorIndex = cookie.indexOf('=');
+                var key = cookie.substring(0, separatorIndex);
+                var value = cookie.substring(separatorIndex + 1);
+                cookies[key] = value;
+            }
+
+            return cookies;
+        }
+        function getCookieValue(cookieName) {
+            var cookies = getAllCookies();
+            return cookies[cookieName];
+        }
+        function get_customer_orders()
+        {
+            var userId = getCookieValue('isUser');
+            let data = {
+                id: userId,
+            }
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST","http://localhost:8080/get-customer-orders",true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.onload = function()
+            {
+                let res = JSON.parse(this.responseText);
+                console.log(res);
+                document.getElementById("show_orders").innerHTML = "";
+                res.forEach(function(item){
+                    console.log("here");
+                    let customer = item.customer;
+                    let order = item.order;
+                    let status = "";
+                    if(order.status == 0)
+                    {
+                        status = "Process";
+                    }
+                    else{
+                        status = "success";
+                    }
+                    let htmlString = `
+                    <tr>
+                            <td>${customer.name}</td>
+                            <td>${order.started_date}</td>
+                            <td>${order.due_date}</td>
+                            <td>${status}</td>
+                            <td>${order.total}</td>
+                            <td>
+                                <a href="/viewOrder?id=${order.id}" class ="btn btn-primary">View</a>
+                                <a class = "btn btn-danger" data-toggle="modal" data-target="#delete-order" onclick="DeleteOrder(${order.id})" data-id="${item.id}">Delete</a>
+                            </td>
+                    </tr>
+                    `;
+                    document.getElementById("show_orders").innerHTML+=htmlString;
+                })
+            }
+            xhr.send(JSON.stringify(data));
+        }
+        function DeleteOrder(id)
+        {
+                let data = {
+                    id: id
+                };
+                let xhr = new XMLHttpRequest();
+                xhr.open("DELETE","http://localhost:8080/admin/delete-order",true);
+                xhr.setRequestHeader("Content-Type","application/json");
+                xhr.onload = function()
+                {
+                    alert(JSON.parse(this.responseText).message);
+                    location.reload();
+                }
+                xhr.send(JSON.stringify(data));
+        }
+        window.onload = function () {
+            login_register_logout();
+            get_customer_orders();
+            get_category();
+            get_general();
+            get_contacts();
+        }
+    </script>
+</body>
+
+</html>
